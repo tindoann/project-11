@@ -1,0 +1,19 @@
+{
+  "name": "project-11",
+  "version": "1.0.0",
+  "description": " Oggle search app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tindoann/project-11.git"
+  },
+  "author": "Tin Doan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tindoann/project-11/issues"
+  },
+  "homepage": "https://github.com/tindoann/project-11#readme"
+}
