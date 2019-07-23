@@ -3,152 +3,152 @@
 // bearer token - AAAAAAAAAAAAAAAAAAAAAMc6%2FQAAAAAAwOp0nm4pRcBP6Ll%2F1nFZ0qH1dzY%3DFpBUJ6yfl8mJhnZPnQy6IiIIyBk7TIkMNwjbwz01dkFzLi0hDI
 
 // O.Authenticate with Bearer token, then create URL
+// --- USED Codebird Library to complete this call instead of AJAX ---
 // $.ajax({
 //     headers: { Authorization: 'Bearer '+ 'AAAAAAAAAAAAAAAAAAAAAMc6%2FQAAAAAAwOp0nm4pRcBP6Ll%2F1nFZ0qH1dzY%3DFpBUJ6yfl8mJhnZPnQy6IiIIyBk7TIkMNwjbwz01dkFzLi0hDI' },
 //     url: 'https://api.twitter.com/1.1/search/tweets.json?q='+ $search
 //   }).then(function (data) {
 //     // Play with the data
-//     console.log(data)
-//   });
-var cb = new Codebird;
-cb.setBearerToken("AAAAAAAAAAAAAAAAAAAAAMc6%2FQAAAAAAwOp0nm4pRcBP6Ll%2F1nFZ0qH1dzY%3DFpBUJ6yfl8mJhnZPnQy6IiIIyBk7TIkMNwjbwz01dkFzLi0hDI");
+//     console.log(data)      });
+// --- USED Codebird Library to complete this call instead of AJAX ---
+// ==+==================================================================================================================+==
+// ==+==================================================================================================================+==
+// ==+
+// ==+
+// ==+
+// ==+==== MAIN ======================+==
+$(document).ready(function () {
 
-cb.__call(
-    "search_tweets",
-    "q=Twitter",
-    function(response) {
-      console.log(response)
-    },
-    true // this parameter required
-  );
+  var cb = new Codebird;
+  cb.setBearerToken("AAAAAAAAAAAAAAAAAAAAAMc6%2FQAAAAAAwOp0nm4pRcBP6Ll%2F1nFZ0qH1dzY%3DFpBUJ6yfl8mJhnZPnQy6IiIIyBk7TIkMNwjbwz01dkFzLi0hDI");
+  var tweets = ["tweet", "classic"]
 
-/**
- * pulls information from the form and build the query URL
- * @returns {string} URL for NYT API based on form inputs
- */
-// function buildQueryURL() {
-    // queryURL is the url we'll use to query the API
-    // do I need ? after the URL? !~~~
-    // var queryURL = "https://api.twitter.com/1.1/search/tweets.json?";
+  // function renderSearchButtons()
+  function renderSearchButtons() {
+    $("#buttons-display-view").empty()
+    for (var i = 0; i < tweets.length; i++) {
+      var a = $("<button>")
+      a.addClass("tweet")
+      a.attr("data-name", tweets[i])
+      a.text(tweets[i])
+      $("#buttons-display-view").append(a)
+    }
+  }
+  // end renderSearchButtons()
 
-    // Begin building an object to contain our API call's query parameters
-    // Set the API key
-    // var queryParams = { "api-key": "FSU6bR8JdQURQhuv6TUi7QctX" };
 
-    // Grab text the user typed into the search input, add to the queryParams object
-    // queryParams.q = $("#search-term").val().trim();
+  // ==+===============================+==
+  // Click Event Listener - on click #main-search-button. 
+  //  adds button to tweet array with user text entered. - then this calls renderSearchButtons
+  $("#main-search-button").on("click", function (event) {
+    event.preventDefault()
 
-    // Logging the URL so we have access to it for troubleshooting
-//     console.log("---------------\nURL: " + queryURL + "\n---------------");
-//     console.log(queryURL + "Then queryParams - " + $.param(queryParams));
-//     return queryURL + $.param(queryParams);
-// }
+    var tweet = $("#user-search-input").val().trim()
+    tweets.push(tweet)
+    renderSearchButtons()
 
-/**
- * takes API data (JSON/object) and turns it into elements on the page
- * @param {object} twitterData - object containing NYT API data
- */
-// function updatePage(twitterData) {
-    // Get from the form the number of results to display
-    // API doesn't have a "limit" parameter, so we have to do this ourselves
-    // var numArticles = $("#article-count").val();
+    // ==+===============================+==
+    // BUILD TWITTER SEARCH WITH PARAMETERS ENTERED INTO CODEBIRD.js .__call() method
+    // cd.__call("search_tweets", "q=test", function (resp) { console.log(resp)}, true);
+    // - 
+    // generate new code if not working..?? curl function in terminal
+    // cb.setUseProxy(true); - we need this for proxy to get around CORS, but its default true I think dont mess with it
+    // -
+    // Codebird AJAX function  == __call - it builds string for URL with parameters.
+    // cb.__call("search_tweets", "q=test", function (response) {console.log(response)},true);
+    // -
+    // Set new reference to codebird = cb
+    // Set authentication app-only bearer token
+    // -
+    // ==+===============================+==
+    // Codebird ajax function __call
+    // true - this parameter required
 
-    // Log the twitterData to console, where it will show up as an object
-    // console.log("Variable twitterData - " + twitterData);
-    // console.log("------------------------------------");
+    // Thomas - trying to make sure setBearer still holds token - does not stay set and is frustraiting
+    // console.log(cb.setBearerToken) 
+    // changed search_tweets to search/tweets in parameters
+    cb.setBearerToken("AAAAAAAAAAAAAAAAAAAAAMc6%2FQAAAAAAwOp0nm4pRcBP6Ll%2F1nFZ0qH1dzY%3DFpBUJ6yfl8mJhnZPnQy6IiIIyBk7TIkMNwjbwz01dkFzLi0hDI");
 
-    // Loop through and build elements for the defined number of articles
-    // for (var i = 0; i < numArticles; i++) {
-    // Get specific article info for current index
-    // var article = twitterData.response.docs[i];
+    cb.__call(
+      "search_tweets",
+      "q=trump",
+      moment.duration(100),
+      true,
+      moment.duration(100)
+    ).then(
+      function (response) {
 
-    // Increase the articleCount (track article # - starting at 1)
-    // var articleCount = i + 1;
+        // ==+===============================+==
+        // ==+===============+== MAIN CODE FOR HANDLING API RESPONSE 
 
-    // Create the  list group to contain the articles and add the article content for each
-    // var $articleList = $("<ul>");
-    // $articleList.addClass("list-group");
+        var results = response.reply;
+        // console.log(response.reply.statuses[0].text)
+        // console.log(response.reply)
+        console.log("regular response = " + results)
 
-    // Add the newly created element to the DOM
-    // $("#article-section").append($articleList);
+        // for (var i = 0; i < results.length; i++) {
+        //   var text = response.reply.statuses[i].text
+        //   var tweetDiv = $("#tweets-dynamic-view")
+        //   var tweetText = $("<p>").text("tweetText: " + text)
+        //   tweetDiv.append(tweetText)
 
-    // If the article has a headline, log and append to $articleList
-    // var headline = article.headline;
-    // var $articleListItem = $("<li class='list-group-item articleHeadline'>");
+        // Create the new row
+        // var newRow = $("<tr>").append(
+        // Name
+        //   $("<td>").text(trainName)
+        // );
 
-    // if (headline && headline.main) {
-    //     console.log(headline.main);
-    //     $articleListItem.append(
-    //         "<span class='label label-primary'>" +
-    //         articleCount +
-    //         "</span>" +
-    //         "<strong> " +
-    //         headline.main +
-    //         "</strong>"
-    //     );
-    // }
+        // Append the new row to the table
+        // $("#train-table > tbody").append(newRow);
 
-    // If the article has a byline, log and append to $articleList
-    // var byline = article.byline;
+        //       var image = $("<img>").attr("src", imgURLStill).addClass('tweety')
+        // }
 
-    // if (byline && byline.original) {
-    //     console.log(byline.original);
-    //     $articleListItem.append("<h5>" + byline.original + "</h5>");
-    // }
+        // ==+===============+== MAIN CODE FOR HANDLING API RESPONSE
+        // ==+===============================+==
+      }
+      // DO I NEED , HERE ,,,,,,,,,,,,,,,,,
+    );
+    // end then promise after cb.__call
+  });
+  // end on Click main-search-button
 
-    // Log section, and append to document if exists
-    // var section = article.section_name;
-    // console.log(article.section_name);
-    // if (section) {
-    //     $articleListItem.append("<h5>Section: " + section + "</h5>");
-    // }
 
-    // Log published date, and append to document if exists
-    // var pubDate = article.pub_date;
-    // console.log(article.pub_date);
-    // if (pubDate) {
-    //     $articleListItem.append("<h5>" + article.pub_date + "</h5>");
-    // }
+  $('#buttons-display-view').on('click', '.tweet', function () {
+    event.preventDefault();
 
-    // Append and log url
-    // $articleListItem.append("<a href='" + article.web_url + "'>" + article.web_url + "</a>");
-    // console.log(article.web_url);
+    $("#tweets-view").empty()
+    const tweetName = $(this).attr("data-name")
+    console.log("buttons data-name = " + tweetName)
 
-    // Append the article
-    // $articleList.append($articleListItem);
-    // }
-// }
+  });
+  // end buttons-display-view
+  renderSearchButtons()
 
-// Function to empty out the articles
-// function clear() {
-//     $("#article-section").empty();
-// }
+});
 
-// CLICK HANDLERS
-// ==========================================================
+// ==+== END MAIN ==============================================================+==
+// ==+==========================================================================+==
 
-// .on("click") function associated with the Search Button
-// $("#run-search").on("click", function (event) {
-    // This line allows us to take advantage of the HTML "submit" property
-    // This way we can hit enter on the keyboard and it registers the search
-    // (in addition to clicks). Prevents the page from reloading on form submit.
-    // event.preventDefault();
+  // cb.__call(
+  //   "search_tweets",
+  //   { q: "#PHP7" },
+  //   null, // no callback needed, we have the promise
+  //   true // app-only auth
+  // ).then(
+  //   function(data) {
+  //     var reply = data.reply,
+  //       rate = data.rate;
+  //     // ...
+  //   },
+  //   function(err) {
+  //     // ...
+  //   }
+  // );
 
-    // Empty the region associated with the articles
-    // clear();
+// ==+==========================================================================+==
+// ==+==========================================================================+==
 
-    // Build the query URL for the ajax request to the Twitter API
-    // var queryURL = buildQueryURL();
-
-    // Make the AJAX request to the API - GETs the JSON data at the queryURL.
-    // The data then gets passed as an argument to the updatePage function
-    // $.ajax({
-    //     url: queryURL,
-    //     method: "GET"
-    // }).then(updatePage);
-// });
-
-//  .on("click") function associated with the clear button
-// $("#clear-all").on("click", clear);
-
+// END
+// ==+==========================================================================+==
 
