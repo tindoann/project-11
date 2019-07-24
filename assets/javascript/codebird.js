@@ -154,7 +154,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: "setBearerToken",
       value: function setBearerToken(token) {
         this._oauth_bearer_token = token;
-        console.log(token)
+        console.log("codebird.js loaded. logged Bearer token . ")
         // Thomas - my console.log(token)
       }
 
