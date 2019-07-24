@@ -202,7 +202,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var dfd = this._getDfd();
 
         if (!dfd && typeof callback === "undefined") {
-          callback = function callback() { };
+          callback = function callback() {};
         }
 
         this.__call("oauth_invalidateToken", {

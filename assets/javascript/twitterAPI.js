@@ -1,7 +1,7 @@
 // FSU6bR8JdQURQhuv6TUi7QctX (API key)
 // Resource URL - https://api.twitter.com/1.1/search/tweets.json
 // bearer token - AAAAAAAAAAAAAAAAAAAAAMc6%2FQAAAAAAwOp0nm4pRcBP6Ll%2F1nFZ0qH1dzY%3DFpBUJ6yfl8mJhnZPnQy6IiIIyBk7TIkMNwjbwz01dkFzLi0hDI
-
+//              - AAAAAAAAAAAAAAAAAAAAAMc6%2FQAAAAAAwOp0nm4pRcBP6Ll%2F1nFZ0qH1dzY%3DFpBUJ6yfl8mJhnZPnQy6IiIIyBk7TIkMNwjbwz01dkFzLi0hDI
 // O.Authenticate with Bearer token, then create URL
 // --- USED Codebird Library to complete this call instead of AJAX ---
 // $.ajax({
@@ -43,7 +43,7 @@ $(document).ready(function () {
   $("#main-search-button").on("click", function (event) {
     event.preventDefault()
 
-    var tweet = $("#user-search-input").val().trim()
+    var tweet = $("#user-search-input").val()
     tweets.push(tweet)
     renderSearchButtons()
 
@@ -69,51 +69,76 @@ $(document).ready(function () {
     // changed search_tweets to search/tweets in parameters
     cb.setBearerToken("AAAAAAAAAAAAAAAAAAAAAMc6%2FQAAAAAAwOp0nm4pRcBP6Ll%2F1nFZ0qH1dzY%3DFpBUJ6yfl8mJhnZPnQy6IiIIyBk7TIkMNwjbwz01dkFzLi0hDI");
 
+
+
     cb.__call(
       "search_tweets",
-      "q=trump",
-      moment.duration(100),
+      `q=${tweet}`,
+      null,
       true,
-      moment.duration(100)
-    ).then(
-      function (response) {
+      function (reply, rate, err) {
+        if (err) {
+          console.log("error response or timeout exceeded" + err.error);
+        }
+        if (reply) {
+          // store the authenticated token, which may be different from the request token (!)
+          cb.setToken(reply.oauth_token, reply.oauth_token_secret);
+        }
+        // if you need to persist the login after page reload,
+        // consider storing the token in a cookie or HTML5 local storage
+      }).then(
+        function (response) {
+          console.log('response', response);
+          // ==+===============================+==
+          // ==+===============+== MAIN CODE FOR HANDLING API RESPONSE 
 
-        // ==+===============================+==
-        // ==+===============+== MAIN CODE FOR HANDLING API RESPONSE 
+          var results = response.reply;
+          // console.log(response.reply.statuses[0].text)
+          // console.log(response.reply)
+          console.log("response.reply = results", results)
+          console.log("results.statuses.length = ", results.statuses.length)
 
-        var results = response.reply;
-        // console.log(response.reply.statuses[0].text)
-        // console.log(response.reply)
-        console.log("regular response = " + results)
+          for (var i = 0; i < results.statuses.length; i++) {
+            var text = response.reply.statuses[i].text
 
-        // for (var i = 0; i < results.length; i++) {
-        //   var text = response.reply.statuses[i].text
-        //   var tweetDiv = $("#tweets-dynamic-view")
-        //   var tweetText = $("<p>").text("tweetText: " + text)
-        //   tweetDiv.append(tweetText)
+            const genTweet = `
+            <div id="${tweets-dynamic-view}>
 
-        // Create the new row
-        // var newRow = $("<tr>").append(
-        // Name
-        //   $("<td>").text(trainName)
-        // );
 
-        // Append the new row to the table
-        // $("#train-table > tbody").append(newRow);
+            `
+            var tweetDiv = $("#tweets-dynamic-view")
 
-        //       var image = $("<img>").attr("src", imgURLStill).addClass('tweety')
-        // }
+            var tweetCard = $("<div class='card tweetCard'>")
+            
+            tweetCard.addClass("card-body")
 
-        // ==+===============+== MAIN CODE FOR HANDLING API RESPONSE
-        // ==+===============================+==
-      }
-      // DO I NEED , HERE ,,,,,,,,,,,,,,,,,
-    );
-    // end then promise after cb.__call
+            var tweetText = $("<p class='card-text'>").text("tweetText: =" + text)
+            tweetDiv.append(tweetCard)
+          }
+          // Create the new row
+          // var newRow = $("<tr>").append(
+          // Name
+          //   $("<td>").text(trainName)
+          // );
+
+          // Append the new row to the table
+          // $("#train-table > tbody").append(newRow);
+
+          // var image = $("<img>").attr("src", imgURLStill).addClass('tweety')
+
+          // ==+===============+== MAIN CODE FOR HANDLING API RESPONSE
+          // ==+===============================+==
+        }
+        // DO I NEED , HERE ,,,,,,,,,,,,,,,,,
+
+      );
+    // end THEN promise after cb.__call()
+
   });
-  // end on Click main-search-button
+  // end onCLICK main-search-button
 
 
+  // function onCLICK buttons-display-view
   $('#buttons-display-view').on('click', '.tweet', function () {
     event.preventDefault();
 
@@ -123,6 +148,7 @@ $(document).ready(function () {
 
   });
   // end buttons-display-view
+
   renderSearchButtons()
 
 });
@@ -130,23 +156,10 @@ $(document).ready(function () {
 // ==+== END MAIN ==============================================================+==
 // ==+==========================================================================+==
 
-  // cb.__call(
-  //   "search_tweets",
-  //   { q: "#PHP7" },
-  //   null, // no callback needed, we have the promise
-  //   true // app-only auth
-  // ).then(
-  //   function(data) {
-  //     var reply = data.reply,
-  //       rate = data.rate;
-  //     // ...
-  //   },
-  //   function(err) {
-  //     // ...
-  //   }
-  // );
 
 // ==+==========================================================================+==
+
+
 // ==+==========================================================================+==
 
 // END
