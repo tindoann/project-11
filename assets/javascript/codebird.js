@@ -35,6 +35,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
    * @package codebird
    * @subpackage codebird-js
    */
+  // * =====================================================================^^^^^^^^^^^<<<<<<<<<<<<<<<<<<<<
+  // * =====================================================================^^^^^^^^^^^<<<<<<<<<<<<<<<<<<<<
+
   var Codebird = function () {
     function Codebird() {
       _classCallCheck(this, Codebird);
@@ -88,7 +91,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
        * API proxy endpoint
        */
       this._endpoint_proxy = "https://api.jublo.net/codebird/";
-
+      //  =================================
       /**
        * Whether to access the API via a proxy that is allowed by CORS
        * Assume that CORS is only necessary in browsers
@@ -123,6 +126,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
      */
 
 
+    // * =====================================================================^^^^^^^^^^^<<<<<<<<<<<<<<<<<<<<
+    // * =====================================================================^^^^^^^^^^^<<<<<<<<<<<<<<<<<<<<
+    // * =====================================================================^^^^^^^^^^^<<<<<<<<<<<<<<<<<<<<
+    // * =====================================================================^^^^^^^^^^^<<<<<<<<<<<<<<<<<<<<
+    // * ====================  CODEBIRD MAIN Class  ==========================^^^^^^^^^^^<<<<<<<<<<<<<<<<<<<<
+
+
     _createClass(Codebird, [{
       key: "setConsumerKey",
       value: function setConsumerKey(key, secret) {
@@ -131,6 +141,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
 
       /**
+       * =====================================================================^^^^^^^^^^^<<<<<<<<<<<<<<<<<<<<
+       * ================CURRENTLY USING THIS - APP-ONLY AUTH=================^^^^^^^^^^^<<<<<<<<<<<<<<<<<<<<
        * Sets the OAuth2 app-only auth bearer token
        *
        * @param string token OAuth2 bearer token
@@ -142,6 +154,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: "setBearerToken",
       value: function setBearerToken(token) {
         this._oauth_bearer_token = token;
+        console.log(token)
+        // Thomas - my console.log(token)
       }
 
       /**
@@ -157,6 +171,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
 
       /**
+       * =====================================================================^^^^^^^^^^^<<<<<<<<<<<<<<<<<<<<
+       * =============================PER USER VERSION========================^^^^^^^^^^^<<<<<<<<<<<<<<<<<<<<
        * Sets the OAuth request or access token and secret (User key)
        *
        * @param string token  OAuth request or access token
@@ -186,7 +202,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var dfd = this._getDfd();
 
         if (!dfd && typeof callback === "undefined") {
-          callback = function callback() {};
+          callback = function callback() { };
         }
 
         this.__call("oauth_invalidateToken", {
@@ -368,13 +384,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: "_base64_encode",
       value: function _base64_encode(a) {
         var d = void 0,
-            e = void 0,
-            f = void 0,
-            b = void 0,
-            g = 0,
-            h = 0,
-            i = this.b64_alphabet,
-            c = [];
+          e = void 0,
+          f = void 0,
+          b = void 0,
+          g = 0,
+          h = 0,
+          i = this.b64_alphabet,
+          c = [];
         if (!a) {
           return a;
         }
@@ -418,7 +434,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       value: function _http_build_query(e, f, b) {
         function g(c, a, d) {
           var b = void 0,
-              e = [];
+            e = [];
           if (a === true) {
             a = "1";
           } else if (a === false) {
@@ -442,8 +458,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }
         }
         var d,
-            c,
-            h = [];
+          c,
+          h = [];
         if (!b) {
           b = "&";
         }
@@ -499,14 +515,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: "_ksort",
       value: function _ksort(input_arr) {
         var keys = [],
-            sorter = void 0,
-            k = void 0;
+          sorter = void 0,
+          k = void 0;
 
         sorter = function sorter(a, b) {
           var a_float = parseFloat(a),
-              b_float = parseFloat(b),
-              a_numeric = a_float + "" === a,
-              b_numeric = b_float + "" === b;
+            b_float = parseFloat(b),
+            a_numeric = a_float + "" === a,
+            b_numeric = b_float + "" === b;
           if (a_numeric && b_numeric) {
             return a_float > b_float ? 1 : a_float < b_float ? -1 : 0;
           } else if (a_numeric && !b_numeric) {
@@ -619,20 +635,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: "_parse_str",
       value: function _parse_str(str, array) {
         var glue1 = "=",
-            glue2 = "&",
-            array2 = String(str).replace(/^&?([\s\S]*?)&?$/, "$1").split(glue2),
-            i,
-            j,
-            chr,
-            tmp,
-            key,
-            value,
-            bracket,
-            keys,
-            evalStr,
-            fixStr = function fixStr(str) {
-          return decodeURIComponent(str).replace(/([\\"'])/g, "\\$1").replace(/\n/g, "\\n").replace(/\r/g, "\\r");
-        };
+          glue2 = "&",
+          array2 = String(str).replace(/^&?([\s\S]*?)&?$/, "$1").split(glue2),
+          i,
+          j,
+          chr,
+          tmp,
+          key,
+          value,
+          bracket,
+          keys,
+          evalStr,
+          fixStr = function fixStr(str) {
+            return decodeURIComponent(str).replace(/([\\"'])/g, "\\$1").replace(/\n/g, "\\n").replace(/\r/g, "\\r");
+          };
         if (!array) {
           array = this.window;
         }
@@ -746,27 +762,27 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var promise_class = false;
           try {
             promise_class = require("jquery");
-          } catch (e) {}
+          } catch (e) { }
           if (promise_class) {
             return promise_class.Deferred();
           }
           try {
             promise_class = require("q");
-          } catch (e) {}
+          } catch (e) { }
           if (!promise_class) {
             try {
               promise_class = require("rsvp");
-            } catch (e) {}
+            } catch (e) { }
           }
           if (!promise_class) {
             try {
               promise_class = require("when");
-            } catch (e) {}
+            } catch (e) { }
           }
           if (promise_class) {
             try {
               return promise_class.defer();
-            } catch (e) {}
+            } catch (e) { }
           }
         }
         return false;
@@ -863,8 +879,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       value: function _mapFnRestoreParamUnderscores(method) {
         var url_parameters_with_underscore = ["screen_name", "place_id"];
         var i = void 0,
-            param = void 0,
-            replacement_was = void 0;
+          param = void 0,
+          replacement_was = void 0;
         for (i = 0; i < url_parameters_with_underscore.length; i++) {
           param = url_parameters_with_underscore[i].toUpperCase();
           replacement_was = param.split("_").join("/");
@@ -887,9 +903,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: "_mapFnToApiMethod",
       value: function _mapFnToApiMethod(fn, apiparams) {
         var method = "",
-            param = void 0,
-            i = void 0,
-            j = void 0;
+          param = void 0,
+          i = void 0,
+          j = void 0;
 
         // replace _ by /
         method = this._mapFnInsertSlashes(fn);
@@ -973,11 +989,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: "_detectMultipart",
       value: function _detectMultipart(method) {
         var multiparts = [
-        // Tweets
-        "media/upload",
+          // Tweets
+          "media/upload",
 
-        // Users
-        "account/update_profile_image", "account/update_profile_banner"];
+          // Users
+          "account/update_profile_image", "account/update_profile_banner"];
         return multiparts.indexOf(method) > -1;
       }
 
@@ -996,8 +1012,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       value: function _getSignature(httpmethod, method, keys, base_params) {
         // convert params to string
         var base_string = "",
-            key = void 0,
-            value = void 0;
+          key = void 0,
+          value = void 0;
         for (var i = 0; i < keys.length; i++) {
           key = keys[i];
           value = base_params[key];
@@ -1092,12 +1108,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           return;
         }
 
+        // * =====================================================================^^^^^^^^^^^<<<<<<<<<<<<<<<<<<<<
+        // * =====================================================================^^^^^^^^^^^<<<<<<<<<<<<<<<<<<<<
         // only check specific parameters
         var possible_methods = [
-        // Tweets
-        "media/upload",
-        // Accounts
-        "account/update_profile_image", "account/update_profile_banner"];
+          // Tweets
+          "media/upload",
+          // Accounts
+          "account/update_profile_image", "account/update_profile_banner"];
         var possible_files = {
           // Tweets
           "media/upload": "media",
@@ -1322,7 +1340,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
 
         if (!dfd && typeof callback === "undefined") {
-          callback = function callback() {};
+          callback = function callback() { };
         }
 
         var post_fields = "grant_type=client_credentials";
@@ -1345,11 +1363,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             var httpstatus = 12027;
             try {
               httpstatus = xml.status;
-            } catch (e) {}
+            } catch (e) { }
             var response = "";
             try {
               response = xml.responseText;
-            } catch (e) {}
+            } catch (e) { }
             var reply = _this2._parseApiReply(response);
             reply.httpstatus = httpstatus;
             if (httpstatus === 200) {
@@ -1379,6 +1397,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           return this._getPromise(dfd);
         }
       }
+      // * =====================================================================^^^^^^^^^^^<<<<<<<<<<<<<<<<<<<<
+      // * =====================================================================^^^^^^^^^^^<<<<<<<<<<<<<<<<<<<<
+      // * =====================================================================^^^^^^^^^^^<<<<<<<<<<<<<<<<<<<<
+      // * =====================================================================^^^^^^^^^^^<<<<<<<<<<<<<<<<<<<<
+      // * =====================================================================^^^^^^^^^^^<<<<<<<<<<<<<<<<<<<<
+      // * ======================= CALLS =======================================^^^^^^^^^^^<<<<<<<<<<<<<<<<<<<<
 
       /**
        * Calls the API using cURL
@@ -1402,12 +1426,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var _this3 = this;
 
         var app_only_auth = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
-        var callback = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : function () {};
+        var callback = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : function () { };
 
         var dfd = this._getDfd();
 
         var url = this._getEndpoint(method),
-            authorization = null;
+          authorization = null;
 
         var xml = this._getXmlRequestObject();
         if (xml === null) {
@@ -1488,11 +1512,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             var httpstatus = 12027;
             try {
               httpstatus = xml.status;
-            } catch (e) {}
+            } catch (e) { }
             var response = "";
             try {
               response = xml.responseText;
-            } catch (e) {}
+            } catch (e) { }
             var reply = _this3._parseApiReply(response);
             reply.httpstatus = httpstatus;
             var rate = null;
@@ -1530,6 +1554,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
 
       /**
+       * =====================================================================^^^^^^^^^^^<<<<<<<<<<<<<<<<<<<<
+       * =====================================================================^^^^^^^^^^^<<<<<<<<<<<<<<<<<<<<
+       * =====================================================================^^^^^^^^^^^<<<<<<<<<<<<<<<<<<<<
+       * ===================== MAIN API ======================================^^^^^^^^^^^<<<<<<<<<<<<<<<<<<<<
        * Main API handler working on any requests you issue
        *
        * @param string   fn            The member function you called
@@ -1554,7 +1582,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             app_only_auth = callback;
           }
         } else if (typeof callback === "undefined") {
-          callback = function callback() {};
+          callback = function callback() { };
         }
         switch (fn) {
           case "oauth_authenticate":
@@ -1579,11 +1607,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         // map function name to API method
 
         var _mapFnToApiMethod2 = this._mapFnToApiMethod(fn, apiparams),
-            _mapFnToApiMethod3 = _slicedToArray(_mapFnToApiMethod2, 2),
-            method = _mapFnToApiMethod3[0],
-            method_template = _mapFnToApiMethod3[1],
-            httpmethod = this._detectMethod(method_template, apiparams),
-            multipart = this._detectMultipart(method_template);
+          _mapFnToApiMethod3 = _slicedToArray(_mapFnToApiMethod2, 2),
+          method = _mapFnToApiMethod3[0],
+          method_template = _mapFnToApiMethod3[1],
+          httpmethod = this._detectMethod(method_template, apiparams),
+          multipart = this._detectMultipart(method_template);
 
         return this._callApi(httpmethod, method, apiparams, multipart, app_only_auth, callback);
       }
