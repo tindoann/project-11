@@ -1,4 +1,5 @@
 // ==+==============================================================================+==
+
 $(document).ready(function () {
 
   // Set new reference to codebird = cb
@@ -22,6 +23,8 @@ $(document).ready(function () {
 
   $("#main-search-button").on("click", function (event) {
     event.preventDefault()
+
+    $("#twitter-loading").addClass("loader")
 
     var tweet = $("#user-search-input").val().trim()
     tweets.push(tweet)
@@ -58,6 +61,7 @@ $(document).ready(function () {
   // Handle AJAX response after #main-search-button is clicked
   function renderSearchResults(response) {
 
+    $("#tweets-dynamic-view").empty()
     // console.log('renderSearchResults here >> response = ', response);
 
     // error handle response data
@@ -65,7 +69,7 @@ $(document).ready(function () {
       display =
         `
       <div class"card-body text-danger">
-      <p>Codebird tweets error</p>
+      <p>Codebird tweets error -_-</p>
       </div>
       `;
       // console.log(display)
@@ -79,12 +83,13 @@ $(document).ready(function () {
 
         display =
           `
-          <div class"card-body">
-          <p>${text}</p>
+          <div class="card">
+          <div class="card-body">${text}</p>
           </div>
           `;
+          
 
-        console.log(display)
+        // console.log(display)
 
         $('#tweets-dynamic-view').append(display);
       }
@@ -107,6 +112,8 @@ $(document).ready(function () {
 
 
 });
+
+
 // ==+== END MAIN ==============================================================+==
 // ==+==========================================================================+==
 

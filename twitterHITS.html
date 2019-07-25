@@ -14,24 +14,45 @@
 
 
 <body class="d-flex flex-column h-90">
-    <main role="main" class="flex-shrink-0 mainfont my-4 mt-0" id="maincontainerindexpage">
+    <main role="main" class="flex-shrink-0 mainfont mt-0">
+        <!-- id="maincontainerindexpage" -->
         <!-- MAIN _ Begin page content -->
-        <div class="mt-1 container row mx-1">
+        <div class="container mx-auto">
 
             <!-- MAIN DISPLAY -->
             <!-- ================= -->
-            <!-- DISPLAY HEADER - CombosIt Web Scrapes -->
-            <div style="background-color: rgb(54, 94, 128); color: white">
-                <h1 class="text-center">CombosIt</h1>
-                <h3 class="text-center">Custom Web Search</h3>
+            <!-- DISPLAY HEADER  -- ROW - CombosIt Web Scrapes -->
+            <div class="row jumbotron jumbotron-fluid"
+                style="background-color: rgb(54, 94, 128); color: rgb(27, 240, 255)">
+                <div class="container">
+                    <h1 class="display-4 text-center">CombosIt</h1>
+                    <h3 class="lead text-center">Custom Web Search</h3>
+                </div>
             </div>
 
-            <!-- DISPLAY SEARCH RESULTS -->
+
             <!-- ================= -->
+            <!-- ROW - Create Search & Search Buttons -->
             <div class="row">
-                <!-- SEARCH OPTIONS & BUTTONS -->
+
+                <!-- Add SEARCH Card -->
+                <!-- Entry Form  -->
                 <div class="col-6">
-                    <div class="card mb-4">
+                    <div class="card my-1">
+                        <div class="card-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="user-search-input">User Search</label>
+                                    <input class="form-control" id="user-search-input" placeholder="" type="text">
+                                </div>
+                                <button class="btn btn-primary float-right" id="main-search-button">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="card my-1">
                         <div class="card-header">Search Buttons</div>
                         <div class="card-body">
                             <table class="table table-sm table-hover" id='buttons-display-view'>
@@ -46,39 +67,42 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            
+        </div>
+            
+        <!-- ================= -->
+        <!-- DISPLAY NEWS and Twitter SEARCH RESULTS -->
+        <div class="row">
 
-                <!-- Add twitter Card -->
-                <!-- Entry Form  -->
-                <div class="col-6">
-                    <div class="card mb-4">
-                        <div class="card-header">Search</div>
-                        <div class="card-body">
-                            <!-- Card Entry Form -->
-                            <form>
-                                <div class="form-group">
-                                    <label for="user-search-input">User Search</label>
-                                    <input class="form-control" id="user-search-input" placeholder="" type="text">
-                                </div>
-                                <button class="btn btn-primary float-right" id="main-search-button">Submit</button>
-                            </form>
-                        </div>
+            <!-- ================= -->
+            <div class="col-6">
+                <div class="card-header">NewsAPI Search Result</div>
+
+                <!-- Dynamically display generate results to HERE on CARDS -->
+                <div id="news-dynamic-view">
+
+                </div>
+            </div>
+            <!-- ================= -->
+
+            <div class="col-3">
+                <!-- BLANK MIDDLE DIV -->
+            </div>
+            <!-- ================= -->
+
+            <div class="col-3">
+                <div class="card my-1">
+                    <div class="card-header">Twitter Search Results</div>
+                    <!-- Dynamically Generated twitter Cards -->
+                    <!-- Dynamically display generate results to HERE on CARDS -->
+                    <div id="tweets-dynamic-view">
+                        <div class="twitter-loading"></div>
                     </div>
                 </div>
             </div>
 
-            <!-- Dynamically Generated twitter Cards -->
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card mb-4">
-                        <div class="card-header">Twitter Search Results</div>
-                        <!-- Dynamically display generate results to HERE on CARDS -->
-                        <div id="tweets-dynamic-view">
-                            <!-- class="card-body"  -->
-                            <div class="loader"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        </div>
 
     </main>
     <!-- MAIN _ End -->
@@ -86,7 +110,7 @@
     <!-- STICKY FOOTER BOOTSTRAP -->
     <footer class="footer mt-auto py-1 bg-dark">
         <div class="container">
-            <span class="text-muted"></span>
+            <span class="text-muted">footer text</span>
         </div>
     </footer>
 
@@ -110,6 +134,9 @@
     <script type="text/javascript" src="assets/javascript/codebird.js"></script>
     <script type="text/javascript" src="assets/javascript/twitterAPI.js"></script>
 
+    <!-- NewsAPI -->
+    <script type="text/javascript" src="newsAPI/newsAPI.js"></script>
+    <script src="https://apis.google.com/js/client.js?onload=onClientLoad" type="text/javascript"></script>
 </body>
 
 </html>
