@@ -8,6 +8,9 @@ $(document).ready(function () {
   cb.setBearerToken("AAAAAAAAAAAAAAAAAAAAAMc6%2FQAAAAAAwOp0nm4pRcBP6Ll%2F1nFZ0qH1dzY%3DFpBUJ6yfl8mJhnZPnQy6IiIIyBk7TIkMNwjbwz01dkFzLi0hDI");
   var tweets = ["tweet", "classic"]
 
+  // By default display the search from localStorage
+  // $("#user-search-input").text(localStorage.getItem("searchTerm"));
+  // console.log("default localStorage.getItem(searchTerm)) === " , localStorage.getItem("searchTerm"))
 
   function renderSearchButtons() {
     $("#buttons-display-view").empty()
@@ -23,14 +26,18 @@ $(document).ready(function () {
 
   $("#main-search-button").on("click", function (event) {
     event.preventDefault()
-
-
     $(".twitter-loading").addClass("loader")
-    // need to fix for second search. No div with class for this to attach to because we cleared empty that div when searching
 
     var tweet = $("#user-search-input").val().trim()
     tweets.push(tweet)
     renderSearchButtons()
+
+    // Clear localStorage
+    // localStorage.clear();
+
+    // Store searched content into localStorage
+    // localStorage.setItem("searchTerm", tweet);
+
 
     // serch user input as = tweet variable passed into > codebird.js AJAX function __call
     cb.__call(
@@ -49,10 +56,10 @@ $(document).ready(function () {
         // if you need to persist the login after page reload,
         // consider storing the token in a cookie or HTML5 local storage
       }).then(
+        // THEN - handle the response in renderSearchResults(response)
         function (response) {
           console.log('cb ajax response = ', response);
 
-          // handle the RESPONSE in renderSearchResults(response)
           renderSearchResults(response)
         }
       );
@@ -100,7 +107,6 @@ $(document).ready(function () {
           <div class="card-body">${text}</p>
           </div>
           `;
-
 
         $('#tweets-dynamic-view').append(display);
         // add the new tweet cards to the page
