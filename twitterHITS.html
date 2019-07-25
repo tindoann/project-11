@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/modbootstrapstyle.css">
+    <!-- Google Custom Search - RedditDrudgeReport -->
+    <!-- <script async src="https://cse.google.com/cse.js?cx=123:456"></script> -->
 
     <title>CombosIt</title>
 </head>
@@ -20,10 +22,8 @@
         <div class="container mx-auto">
 
             <!-- MAIN DISPLAY -->
-            <!-- ================= -->
             <!-- DISPLAY HEADER  -- ROW - CombosIt Web Scrapes -->
-            <div class="row jumbotron jumbotron-fluid"
-                style="background-color: rgb(54, 94, 128); color: rgb(27, 240, 255)">
+            <div class="row jumbotron jumbotron-fluid project-color-style1">
                 <div class="container">
                     <h1 class="display-4 text-center">CombosIt</h1>
                     <h3 class="lead text-center">Custom Web Search</h3>
@@ -31,13 +31,20 @@
             </div>
 
 
-            <!-- ================= -->
             <!-- ROW - Create Search & Search Buttons -->
             <div class="row">
 
                 <!-- Add SEARCH Card -->
                 <!-- Entry Form  -->
-                <div class="col-6">
+                <div class="col-4 mx-auto">
+                    <div class="card my-1">
+                        <div class="card-header project-color-style1 text-center">FIRST COLUMN col-4</div>
+                        <div class="card-body ">
+                            <!-- EMPTY Search area first row DIV -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 mx-auto">
                     <div class="card my-1">
                         <div class="card-body">
                             <form>
@@ -51,15 +58,16 @@
                     </div>
                 </div>
 
-                <div class="col-6">
+                <div class="col-4 mx-auto">
                     <div class="card my-1">
-                        <div class="card-header">Search Buttons</div>
+                        <div class="card-header project-color-style1 text-center">Search Buttons</div>
                         <div class="card-body">
                             <table class="table table-sm table-hover" id='buttons-display-view'>
                                 <thead>
                                     <tr>
-                                        <th scope="col">Twitter Results</th>
+                                        <!-- <th scope="col">Twitter Results</th> -->
                                     </tr>
+
                                 </thead>
                                 <tbody>
                                 </tbody>
@@ -68,44 +76,42 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
-            
-        <!-- ================= -->
-        <!-- DISPLAY NEWS and Twitter SEARCH RESULTS -->
+        <!-- End Main Container -->
+
+        <!-- Not in Container -->
+        <!-- ROW - DISPLAY SEARCH RESULTS - NewsAPI, Youtube, Twitter-->
         <div class="row">
 
-            <!-- ================= -->
             <div class="col-6">
-                <div class="card-header">NewsAPI Search Result</div>
+                <div class="card-header project-color-style1">NewsAPI Search Result</div>
 
                 <!-- Dynamically display generate results to HERE on CARDS -->
-                <div id="news-dynamic-view">
-
-                </div>
+                <div id="news-dynamic-view"></div>
             </div>
-            <!-- ================= -->
 
             <div class="col-3">
+                <div class="card-header project-color-style1">Youtube Search Results</div>
                 <!-- BLANK MIDDLE DIV -->
             </div>
-            <!-- ================= -->
 
             <div class="col-3">
-                <div class="card my-1">
-                    <div class="card-header">Twitter Search Results</div>
-                    <!-- Dynamically Generated twitter Cards -->
-                    <!-- Dynamically display generate results to HERE on CARDS -->
-                    <div id="tweets-dynamic-view">
-                        <div class="twitter-loading"></div>
-                    </div>
+                <div class="card-header project-color-style1">Twitter/ Reddit Search Results</div>
+
+                <div class="twitter-loading"></div>
+                <!-- Dynamically Generated twitter Cards -->
+                <!-- Dynamically display generate results to HERE on CARDS -->
+                <div id="tweets-dynamic-view">
+                    <!--  If twitter doesent get response, custom search twitter with google -->
+
                 </div>
             </div>
-
+        </div>
         </div>
 
     </main>
-    <!-- MAIN _ End -->
+
 
     <!-- STICKY FOOTER BOOTSTRAP -->
     <footer class="footer mt-auto py-1 bg-dark">

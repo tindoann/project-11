@@ -1,5 +1,11 @@
 /* MOD BootStrap Style */
 
+.project-color-style1 {
+
+    background-color: rgb(54, 94, 128); 
+    color: rgb(27, 240, 255);
+}
+
 
 /* .card-img-overlay {
 background-size: cover;
@@ -7,7 +13,7 @@ background-size: cover;
 } */
 
 body {
-    background-color: rgb(53, 61, 59);
+    background-color: rgb(46, 56, 63);
     /* background-size: cover; */
 }
 
@@ -67,7 +73,7 @@ p {
 
 /* CSS ANIMATIONS */
 
-.twitter-loading {
+.loader {
     font-size: 10px;
     margin: 50px auto;
     text-indent: -9999em;
@@ -88,7 +94,7 @@ p {
     transform: translateZ(0);
 }
 
-.twitter-loading:before {
+.loader:before {
     width: 50%;
     height: 50%;
     background: #7bfffa;
@@ -99,7 +105,7 @@ p {
     content: '';
 }
 
-.twitter-loading:after {
+.loader:after {
     background: #91a9c5;
     width: 75%;
     height: 75%;
