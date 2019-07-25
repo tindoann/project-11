@@ -1,16 +1,21 @@
 // ==+==============================================================================+==
 
-$(document).ready(function () {
+// function window.onload() {
+  
+// }
 
+$(document).ready(function () {
+  
   // Set new reference to codebird = cb
   // Set authentication app-only bearer token
   var cb = new Codebird;
   cb.setBearerToken("AAAAAAAAAAAAAAAAAAAAAMc6%2FQAAAAAAwOp0nm4pRcBP6Ll%2F1nFZ0qH1dzY%3DFpBUJ6yfl8mJhnZPnQy6IiIIyBk7TIkMNwjbwz01dkFzLi0hDI");
   var tweets = ["tweet", "classic"]
-
+  
+  var localStorageTerm = localStorage.getItem("searchTerm")
   // By default display the search from localStorage
-  // $("#user-search-input").text(localStorage.getItem("searchTerm"));
-  // console.log("default localStorage.getItem(searchTerm)) === " , localStorage.getItem("searchTerm"))
+  $(".last-search-term").val(localStorageTerm);
+  console.log("default localStorage.getItem(searchTerm)) === " , localStorageTerm)
 
   function renderSearchButtons() {
     $("#buttons-display-view").empty()
@@ -33,10 +38,10 @@ $(document).ready(function () {
     renderSearchButtons()
 
     // Clear localStorage
-    // localStorage.clear();
+    localStorage.clear();
 
     // Store searched content into localStorage
-    // localStorage.setItem("searchTerm", tweet);
+    localStorage.setItem("searchTerm", tweet);
 
 
     // serch user input as = tweet variable passed into > codebird.js AJAX function __call
@@ -77,9 +82,9 @@ $(document).ready(function () {
     console.log("response.reply.httpstatus = ", response.reply.httpstatus)
 
     // error handle response data
+    // card columns may be the way to go
     if (response.reply.httpstatus === 0) {
 
-      // card columns may be the way to go
       display =
         `
       <div class"card-body text-danger">
