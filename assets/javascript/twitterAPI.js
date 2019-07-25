@@ -24,7 +24,9 @@ $(document).ready(function () {
   $("#main-search-button").on("click", function (event) {
     event.preventDefault()
 
-    $("#twitter-loading").addClass("loader")
+
+    $(".twitter-loading").addClass("loader")
+    // need to fix for second search. No div with class for this to attach to because we cleared empty that div when searching
 
     var tweet = $("#user-search-input").val().trim()
     tweets.push(tweet)
@@ -59,22 +61,33 @@ $(document).ready(function () {
 
 
   // Handle AJAX response after #main-search-button is clicked
+  // IF twitter does not respond, css animation, on bad Response - custom Reddit Google Search
+  // ELSE tidder good response, search twitter
   function renderSearchResults(response) {
 
     $("#tweets-dynamic-view").empty()
     // console.log('renderSearchResults here >> response = ', response);
+    console.log("response.reply.httpstatus = ", response.reply.httpstatus)
 
     // error handle response data
     if (response.reply.httpstatus === 0) {
+
+      // card columns may be the way to go
       display =
         `
       <div class"card-body text-danger">
-      <p>Codebird tweets error -_-</p>
+      <div class="card-header text-danger">Codebird tweets error -_- </div>
+      <div class="card-text text-success">Try a custom Reddit Search below!</div>
+      <div class="card-text text-success">HINT: include Twitter to search for Reddit threads describing things that happen on twitter</div>
+      <script async src="https://cse.google.com/cse.js?cx=016389558833326296142:ezmrodyt_by"></script>
+      <div class="gcse-search">"search reddit"</div>
       </div>
       `;
-      // console.log(display)
-
+      $(".twitter-loading").removeClass("loader")
       $('#tweets-dynamic-view').append(display);
+
+      console.log("twitter ran incorrectly -> response.reply.httpstatus = ", response.reply.httpstatus)
+      // console.log(display)
     } else {
       // else response data > dynamically generate tweets text on card body
       for (let i = 0; i < response.reply.statuses.length; i++) {
@@ -87,11 +100,13 @@ $(document).ready(function () {
           <div class="card-body">${text}</p>
           </div>
           `;
-          
 
-        // console.log(display)
 
         $('#tweets-dynamic-view').append(display);
+        // add the new tweet cards to the page
+
+        console.log("twitter ran correctly -> response.reply.statuses.length = ", response.reply.statuses.length)
+        // console.log(display)
       }
     }
 
