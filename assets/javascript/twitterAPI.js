@@ -1,21 +1,27 @@
 // ==+==============================================================================+==
+// names
+// -- Bounce
+// -- Post
+// -- 
+
 
 // function window.onload() {
-  
+
 // }
 
 $(document).ready(function () {
-  
+
+
   // Set new reference to codebird = cb
   // Set authentication app-only bearer token
   var cb = new Codebird;
   cb.setBearerToken("AAAAAAAAAAAAAAAAAAAAAMc6%2FQAAAAAAwOp0nm4pRcBP6Ll%2F1nFZ0qH1dzY%3DFpBUJ6yfl8mJhnZPnQy6IiIIyBk7TIkMNwjbwz01dkFzLi0hDI");
   var tweets = ["tweet", "classic"]
-  
+
   var localStorageTerm = localStorage.getItem("searchTerm")
   // By default display the search from localStorage
   $(".last-search-term").val(localStorageTerm);
-  console.log("default localStorage.getItem(searchTerm)) === " , localStorageTerm)
+  console.log("default localStorage.getItem(searchTerm)) === ", localStorageTerm)
 
   function renderSearchButtons() {
     $("#buttons-display-view").empty()
@@ -79,7 +85,7 @@ $(document).ready(function () {
 
     $("#tweets-dynamic-view").empty()
     // console.log('renderSearchResults here >> response = ', response);
-    console.log("response.reply.httpstatus = ", response.reply.httpstatus)
+    // console.log("response.reply.httpstatus = ", response.reply.httpstatus)
 
     // error handle response data
     // card columns may be the way to go
@@ -87,14 +93,10 @@ $(document).ready(function () {
 
       display =
         `
-      <div class"card-body text-danger">
-      <div class="card-header text-danger">Codebird tweets error -_- </div>
-      <div class="card-text text-success">Try a custom Reddit Search below!</div>
-      <div class="card-text text-success">HINT: include Twitter to search for Reddit threads describing things that happen on twitter</div>
-      <script async src="https://cse.google.com/cse.js?cx=016389558833326296142:ezmrodyt_by"></script>
-      <div class="gcse-search">"search reddit"</div>
-      </div>
-      `;
+        <div class"card-body text-danger">
+        <div class="card-header text-danger">-_- Codebird.js Proxy Error -_-</div>
+        `
+
       $(".twitter-loading").removeClass("loader")
       $('#tweets-dynamic-view').append(display);
 
