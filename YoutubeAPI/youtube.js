@@ -1,3 +1,8 @@
+
+
+// $('.main-search-button').on('click', function () {
+// event.preventDefault()
+// }
 function tplawesome(e, t) { res = e; for (var n = 0; n < t.length; n++) { res = res.replace(/\{\{(.*?)\}\}/g, function (e, r) { return t[n][r] }) } return res }
 
 function onClientLoad() {
@@ -37,8 +42,9 @@ function search(event) {
 
       });
     });
-  })
-}
+  });
+})
+
 
 function loadVideo() {
   var apiKey = "AIzaSyBEDZ-mNT4ZebCqzIan1K8VrZ2FwHgJ-e8";
@@ -52,9 +58,9 @@ function loadVideo() {
     // const results = response.request;
     // console.log(results)
   })
+
+  // onClientLoad();
+  loadVideo();
 }
-
-loadVideo();
-
 
 
