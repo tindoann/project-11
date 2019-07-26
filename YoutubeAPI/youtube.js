@@ -10,7 +10,8 @@ function onYouTubeApiLoad() {
 }
 
 // Called when the search button is clicked in the html code
-function search() {
+$('.main-search-button').on('click', function (prevent) {
+  event.preventDefault()
   $('#user-search-input').empty();
   var query = $('#user-search-input').val().trim();
 
@@ -35,7 +36,7 @@ function search() {
       });
     });
   })
-}
+})
 
 function loadVideo() {
   var apiKey = "AIzaSyB_LacdNoyYmvySVPxZIORjEZ4hjXu13S4";
