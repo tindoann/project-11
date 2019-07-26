@@ -43,7 +43,8 @@ function search(event) {
       });
     });
   });
-})
+}
+// )
 
 
 function loadVideo() {

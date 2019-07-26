@@ -86,31 +86,56 @@
         <div class="row">
 
             <div class="col-6">
-                <div class="card-header project-color-style1">NewsAPI Search Result</div>
+                <div class="card-header project-color-style1">NewsAPI Search Result
+                </div>
 
-                <!-- Dynamically display generate results to HERE on CARDS -->
-                <div id="news-dynamic-view"></div>
+                <div id="news-dynamic-view">
+                </div>
+                <!-- newsAPI -->
             </div>
 
             <div class="col-3">
-                <div class="card-header project-color-style1">Youtube Search Results</div>
+                <div class="card-header project-color-style1">Youtube Search Results
+
+                </div>
                 <!-- BLANK MIDDLE DIV -->
                 <div id="youtube-video-column"></div>
             </div>
 
             <div class="col-3">
-                <div class="card-header project-color-style1">Twitter/ Reddit Search Results</div>
+                <div class="card-header project-color-style1">Reddit Custom Search
 
-                <div class="twitter-loading"></div>
+                </div>
+                <div id="reddit-diplay-column"></div>
+
+
+            </div>
+        </div>
+
+        <!-- IF TWITTER WORKS IT GOES HERE/ IF NOT WE DELETE LATER -->
+        <div class="row">
+
+            <div class="col-4">
+            </div>
+
+            <div class="col-4">
+
+                <div class="card-header project-color-style1">Twitter Search Results
+                </div>
                 <!-- Dynamically Generated twitter Cards -->
                 <!-- Dynamically display generate results to HERE on CARDS -->
                 <div id="tweets-dynamic-view">
-                    <!--  If twitter doesent get response, custom search twitter with google -->
-
+                    <!--  If twitter doesent get response, REMOVECLASS CSS .loader -->
                 </div>
+                <div class="twitter-loading">
+                </div>
+
+            </div>
+
+            <div class="col-4">
             </div>
         </div>
-        </div>
+
 
     </main>
 

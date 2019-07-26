@@ -1,47 +1,64 @@
 // ==+==============================================================================+==
+// names
+// -- Bounce
+// -- Post
+// -- Combust
+// -- NetBust
+// -- Knock (news Knock)
+// -- Newesum
 
 // function window.onload() {
-  
+
 // }
 
 $(document).ready(function () {
-  
+
   // Set new reference to codebird = cb
   // Set authentication app-only bearer token
   var cb = new Codebird;
   cb.setBearerToken("AAAAAAAAAAAAAAAAAAAAAMc6%2FQAAAAAAwOp0nm4pRcBP6Ll%2F1nFZ0qH1dzY%3DFpBUJ6yfl8mJhnZPnQy6IiIIyBk7TIkMNwjbwz01dkFzLi0hDI");
   var tweets = ["tweet", "classic"]
-  
+
   var localStorageTerm = localStorage.getItem("searchTerm")
   // By default display the search from localStorage
   $(".last-search-term").val(localStorageTerm);
-  console.log("default localStorage.getItem(searchTerm)) === " , localStorageTerm)
+  console.log("default localStorage.getItem(searchTerm)) === ", localStorageTerm)
+  // END vars
 
-  function renderSearchButtons() {
-    $("#buttons-display-view").empty()
-    for (var i = 0; i < tweets.length; i++) {
-      var a = $("<button>")
-      a.addClass("tweet")
-      a.attr("data-name", tweets[i])
-      a.text(tweets[i])
-      $("#buttons-display-view").append(a)
-    }
+  // new function to call Google search
+  function searchGoogleCSE(tweet) {
+    console.log("searchGoogleCSE() > tweet =", tweet)
+    // $("#googleCSE").val(tweet)
+    display =
+      `
+        <script async src="https://cse.google.com/cse.js?cx=016389558833326296142:ezmrodyt_by"></script>
+        <div class="gcse-search" id="googleCSE" data-autoSearchOnLoad="true" data-autoCompleteMaxCompletions="5"
+        >"${tweet}"</div>
+      `;
+    $("#reddit-diplay-column").append(display)
+
+
   }
+
 
 
   $(".main-search-button").on("click", function (event) {
     event.preventDefault()
+
     $(".twitter-loading").addClass("loader")
+    $("#reddit-diplay-column").empty()
 
     var tweet = $("#user-search-input").val().trim()
     tweets.push(tweet)
+
+    searchGoogleCSE(tweet)
     renderSearchButtons()
 
     // Clear localStorage
     localStorage.clear();
-
     // Store searched content into localStorage
     localStorage.setItem("searchTerm", tweet);
+
 
 
     // serch user input as = tweet variable passed into > codebird.js AJAX function __call
@@ -63,7 +80,7 @@ $(document).ready(function () {
       }).then(
         // THEN - handle the response in renderSearchResults(response)
         function (response) {
-          console.log('cb ajax response = ', response);
+          console.log('cb ajax > response = ', response);
 
           renderSearchResults(response)
         }
@@ -79,7 +96,7 @@ $(document).ready(function () {
 
     $("#tweets-dynamic-view").empty()
     // console.log('renderSearchResults here >> response = ', response);
-    console.log("response.reply.httpstatus = ", response.reply.httpstatus)
+    // console.log("response.reply.httpstatus = ", response.reply.httpstatus)
 
     // error handle response data
     // card columns may be the way to go
@@ -87,42 +104,48 @@ $(document).ready(function () {
 
       display =
         `
-      <div class"card-body text-danger">
-      <div class="card-header text-danger">Codebird tweets error -_- </div>
-      <div class="card-text text-success">Try a custom Reddit Search below!</div>
-      <div class="card-text text-success">HINT: include Twitter to search for Reddit threads describing things that happen on twitter</div>
-      <script async src="https://cse.google.com/cse.js?cx=016389558833326296142:ezmrodyt_by"></script>
-      <div class="gcse-search">"search reddit"</div>
-      </div>
-      `;
+          <div class"card-body text-danger">
+          <div class="card-header text-danger">-_- Codebird.js Proxy Error -_-</div>
+          `
+
       $(".twitter-loading").removeClass("loader")
       $('#tweets-dynamic-view').append(display);
 
       console.log("twitter ran incorrectly -> response.reply.httpstatus = ", response.reply.httpstatus)
-      // console.log(display)
-    } else {
+
       // else response data > dynamically generate tweets text on card body
+    } else {
+
       for (let i = 0; i < response.reply.statuses.length; i++) {
 
         var text = response.reply.statuses[i].text
 
         display =
           `
-          <div class="card">
-          <div class="card-body">${text}</p>
-          </div>
-          `;
+            <div class="card">
+            <div class="card-body">${text}</p>
+            </div>
+            `;
 
         $('#tweets-dynamic-view').append(display);
         // add the new tweet cards to the page
 
         console.log("twitter ran correctly -> response.reply.statuses.length = ", response.reply.statuses.length)
-        // console.log(display)
       }
     }
 
   }
 
+  function renderSearchButtons() {
+    $("#buttons-display-view").empty()
+    for (var i = 0; i < tweets.length; i++) {
+      var a = $("<button>")
+      a.addClass("tweet")
+      a.attr("data-name", tweets[i])
+      a.text(tweets[i])
+      $("#buttons-display-view").append(a)
+    }
+  }
 
   $('#buttons-display-view').on('click', '.tweet', function () {
     event.preventDefault();
