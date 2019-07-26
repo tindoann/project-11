@@ -15,12 +15,14 @@ function search(event) {
   $('#query').empty();
   var query = $('#user-search-input').val().trim();
   console.log(query)
+
   // Use the JavaScript client library to create a search.list() API call.
   var request = gapi.client.youtube.search.list({
     part: 'snippet',
     type: 'video',
     description: 'description',
     maxResults: 2,
+
     q: query
   });
 
@@ -32,6 +34,7 @@ function search(event) {
     $.each(results.items, function (index, item) {
       $.get("item.html", function (data) {
         $("#youtube-video-column").append(tplawesome(data, [{ "title": item.snippet.title, "videoid": item.id.videoId, "description": item.snippet.description}]));
+
       });
     });
   })
