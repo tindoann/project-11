@@ -29,7 +29,7 @@ $(document).ready(function () {
   }
 
 
-  $("#main-search-button").on("click", function (event) {
+  $(".main-search-button").on("click", function (event) {
     event.preventDefault()
     $(".twitter-loading").addClass("loader")
 

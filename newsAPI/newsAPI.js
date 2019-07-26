@@ -1,4 +1,4 @@
-$('#main-search-button').on('click', function () {
+$('.main-search-button').on('click', function () {
   $("#display-view").empty()
   var query = $('#user-search-input').val().trim();
   console.log("NewsAPI query = ", query);

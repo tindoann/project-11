@@ -1,3 +1,8 @@
+
+
+// $('.main-search-button').on('click', function () {
+// event.preventDefault()
+// }
 function tplawesome(e, t) { res = e; for (var n = 0; n < t.length; n++) { res = res.replace(/\{\{(.*?)\}\}/g, function (e, r) { return t[n][r] }) } return res }
 
 function onClientLoad() {
@@ -10,32 +15,35 @@ function onYouTubeApiLoad() {
 }
 
 // Called when the search button is clicked in the html code
-function search() {
-  $('#query').empty();
-  var query = $('#query').val().trim();
 
-  // Use the JavaScript client library to create a search.list() API call.
-  var request = gapi.client.youtube.search.list({
-    part: 'snippet',
-    type: 'video',
-    description: 'description',
-    maxResults: 5,
-    q: query
-  });
+// $('#user-search-input').empty();
+var query = $('#user-search-input').val().trim();
+console.log("query in YOUTUBE API =", query)
 
-  // execute the request
-  request.execute(function (response) {
-    console.log('the response', response);
-    var results = response.result;
-    $("#results").html("");
-    $.each(results.items, function (index, item) {
-      $.get("item.html", function (data) {
-        $("#results").append(tplawesome(data, [{ "title": item.snippet.title, "videoid": item.id.videoId, "description": item.snippet.description}]));
-        //$("#results").append(item.id.videoId+' '+item.snippet.title+'<br'); 
-      });
+// Use the JavaScript client library to create a search.list() API call.
+var request = gapi.client.youtube.search.list({
+  part: 'snippet',
+  type: 'video',
+  description: 'description',
+  maxResults: 5,
+  q: query
+});
+console.log("gapi.client.youtube.search.list YOUTUBE API =", gapi.client.youtube.search.list)
+
+
+// execute the request
+request.execute(function (response) {
+  console.log('the response', response);
+  var results = response.result;
+  $("#results").html("");
+  $.each(results.items, function (index, item) {
+    $.get("item.html", function (data) {
+      $("#youtube-video-column").append(tplawesome(data, [{ "title": item.snippet.title, "videoid": item.id.videoId, "description": item.snippet.description }]));
+      //$("#results").append(item.id.videoId+' '+item.snippet.title+'<br'); 
     });
-  })
-}
+  });
+})
+
 
 function loadVideo() {
   var apiKey = "AIzaSyBEDZ-mNT4ZebCqzIan1K8VrZ2FwHgJ-e8";
@@ -49,9 +57,8 @@ function loadVideo() {
     // const results = response.request;
     // console.log(results)
   })
+
+  // onClientLoad();
+  loadVideo();
 }
-
-onClickLoad();
-loadVideo();
-
 
