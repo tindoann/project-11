@@ -50,9 +50,13 @@
                             <form>
                                 <div class="form-group">
                                     <label for="user-search-input">User Search</label>
-                                    <input class="form-control last-search-term" id="user-search-input" placeholder="" type="text">
+
+                                  <input class="form-control last-search-term" id="user-search-input" placeholder=""
+                                        type="text">
                                 </div>
-                                <button class="btn btn-primary float-right" id="main-search-button">Submit</button>
+                                <button class="btn btn-primary float-right main-search-button" onclick="search()">Submit</button>
+
+
                             </form>
                         </div>
                     </div>
@@ -90,6 +94,27 @@
                 <!-- Dynamically display generate results to HERE on CARDS -->
                 <div id="news-dynamic-view"></div>
             </div>
+
+            <div class="col-3">
+                <div class="card-header project-color-style1">Youtube Search Results</div>
+                <!-- BLANK MIDDLE DIV -->
+                <div id="youtube-video-column"></div>
+            </div>
+
+            <div class="col-3">
+                <div class="card-header project-color-style1">Twitter/ Reddit Search Results</div>
+
+                <div class="twitter-loading"></div>
+                <!-- Dynamically Generated twitter Cards -->
+                <!-- Dynamically display generate results to HERE on CARDS -->
+                <div id="tweets-dynamic-view">
+                    <!--  If twitter doesent get response, custom search twitter with google -->
+
+                </div>
+
+            </div>
+        </div>
+        </div>
 
             <div class="col-3">
                 <div class="card-header project-color-style1">Youtube Search Results</div>
@@ -143,6 +168,8 @@
     <!-- NewsAPI -->
     <script type="text/javascript" src="newsAPI/newsAPI.js"></script>
     <script src="https://apis.google.com/js/client.js?onload=onClientLoad" type="text/javascript"></script>
+
+  
 </body>
 
 </html>
