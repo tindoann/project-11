@@ -5,18 +5,22 @@ function onClientLoad() {
 }
 // Called automatically when YouTube API interface is loaded/
 function onYouTubeApiLoad() {
-  gapi.client.setApiKey('AIzaSyBEDZ-mNT4ZebCqzIan1K8VrZ2FwHgJ-e8');
+  gapi.client.setApiKey('AIzaSyB_LacdNoyYmvySVPxZIORjEZ4hjXu13S4')
+  // gapi.client.setApiKey('AIzaSyBEDZ-mNT4ZebCqzIan1K8VrZ2FwHgJ-e8');
 }
 
 // Called when the search button is clicked in the html code
-function search() {
+function search(event) {
+  event.preventDefault();
   $('#query').empty();
-  var query = $('#query').val().trim();
+  var query = $('#user-search-input').val().trim();
+  console.log(query)
   // Use the JavaScript client library to create a search.list() API call.
   var request = gapi.client.youtube.search.list({
     part: 'snippet',
     type: 'video',
-    maxResults: 5,
+    description: 'description',
+    maxResults: 2,
     q: query
   });
 
@@ -24,24 +28,18 @@ function search() {
   request.execute(function (response) {
     console.log('the response', response);
     var results = response.result;
-    $("#results").html("");
+    $("#youtube-video-column").html("");
     $.each(results.items, function (index, item) {
-      $.get("tpl/item.html", function (data) {
-        $("#results").append(tplawesome(data, [{ "title": item.snippet.title, "videoid": item.id.videoId }]));
-        //$("#results").append(item.id.videoId+' '+item.snippet.title+'<br'); 
+      $.get("item.html", function (data) {
+        $("#youtube-video-column").append(tplawesome(data, [{ "title": item.snippet.title, "videoid": item.id.videoId, "description": item.snippet.description}]));
       });
     });
   })
 }
-// Triggered by this line: request.execute(onSearchResponse);
-// function onSearchResponse(response) {
-//     var responseString = JSON.stringify(response, '', 1);
-//     document.getElementById('response').innerHTML = responseString;
-// } 
 
 function loadVideo() {
   var apiKey = "AIzaSyBEDZ-mNT4ZebCqzIan1K8VrZ2FwHgJ-e8";
-  var queryURL = 'https://www.googleapis.com/youtube/v3/search?part=snippet&q=cat&maxResults=10&order=viewCount&publishedAfter=2016-01-01T00%3A00%3A00Z&q=teaser%7Ctrailer&type=video&videoCaption=any&videoCategoryId=24&videoEmbeddable=true&key=' + apiKey;
+  var queryURL = 'https://www.googleapis.com/youtube/v3/search?part=snippet&q=cat&maxResults=2&order=viewCount&publishedAfter=2016-01-01T00%3A00%3A00Z&q=teaser%7Ctrailer&type=video&videoCaption=any&videoCategoryId=24&videoEmbeddable=true&key=' + apiKey;
   $.ajax({
     url: queryURL,
     method: 'GET'
@@ -52,6 +50,8 @@ function loadVideo() {
     // console.log(results)
   })
 }
+
 loadVideo();
+
 
 
