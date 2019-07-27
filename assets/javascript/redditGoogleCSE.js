@@ -1,39 +1,38 @@
 $('.main-search-button').on('click', function (prevent) {
     event.preventDefault()
-    $("#display-view").empty()
+
     $("#reddit-display-column").empty()
     var query = $('#user-search-input').val().trim();
-    console.log("ReditGoogleCSE query = ", query);
 
-    var queryURL = "https://www.googleapis.com/customsearch/v1?key=AIzaSyAL7vdfKAd9Wpr44QTiZPdHYRorgEE6xw4&cx=016389558833326296142:ezmrodyt_by&q=" + query;
-    console.log("Reddit queryURL =", queryURL)
+    console.log("Reddit query = ", query);
+
+    var queryURL = "https://www.googleapis.com/customsearch/v1?key=AIzaSyCdt-76haNdFwBD667_DvInWELsT1iRfe4&cx=016389558833326296142:ezmrodyt_by&q=" + query;
+    // console.log("Reddit queryURL =", queryURL)
+    // redditsearch API1 = AIzaSyAL7vdfKAd9Wpr44QTiZPdHYRorgEE6xw4
+    // redditsearch API2 = AIzaSyCdt-76haNdFwBD667_DvInWELsT1iRfe4
     $.ajax({
         url: queryURL,
         method: "GET"
     }).then(function (response) {
-        console.log("REDDITresponse =", response);
+        // console.log("REDDITresponse =", response);
 
-        // <img class="card-img-bottom" src="${response.items[i].pagemap.cse_image.src}" alt="Card image cap">
         for (let i = 0; i < response.items.length; i++) {
+
+            var item = response.items[i]
             display =
                 `
                 <div class="card m-2">
                 <div class="card-body">
                 
-                <div class="card-title">${response.items[i].htmlTitle}
+                <div class="card-title">${item.title}
                 </div>
-                <p class="card-text">${response.items[i].htmlSnippet}</p>
-                <a href='${response.items[i].link}' class='btn'>Read more</a>
+                <p class="card-text">${item.snippet}</p>
+                <a href='${item.link}' class='btn'>Read more</a>
                 </div>
                 `;
 
             $('#reddit-display-column').append(display);
 
-            // <img class="card-img-bottom" src="${response.items[i].urlToImage}" alt="Card image cap">
-            //       <p class="card-text">${response.items[i].description}</p>
-            //       
-            //       <p class="card-text">Published on: ${response.items[i].publishedAt}</p>
-            //   </div>
         }
     })
 })
