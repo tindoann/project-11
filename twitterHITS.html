@@ -38,14 +38,6 @@
                 <!-- Entry Form  -->
                 <div class="col-4 mx-auto">
                     <div class="card my-1">
-                        <div class="card-header project-color-style1 text-center">FIRST COLUMN col-4</div>
-                        <div class="card-body ">
-                            <!-- EMPTY Search area first row DIV -->
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4 mx-auto">
-                    <div class="card my-1">
                         <div class="card-body">
                             <form>
                                 <div class="form-group">
@@ -85,32 +77,62 @@
         <!-- ROW - DISPLAY SEARCH RESULTS - NewsAPI, Youtube, Twitter-->
         <div class="row">
 
-            <div class="col-6">
-                <div class="card-header project-color-style1">NewsAPI Search Result</div>
+            <div class="col-4">
+                <div class="scrollbar">
+                <div class="card-header project-color-style1">NewsAPI Search Result
+                </div>
 
-                <!-- Dynamically display generate results to HERE on CARDS -->
-                <div id="news-dynamic-view"></div>
+                <div id="news-dynamic-view">
+                </div>
+                </div>  
+                <!-- newsAPI -->
             </div>
 
-            <div class="col-3">
-                <div class="card-header project-color-style1">Youtube Search Results</div>
+            <div class="col-4">
+                <div class="scrollbar">
+                <div class="card-header project-color-style1">Youtube Search Results
+
+                </div>
                 <!-- BLANK MIDDLE DIV -->
                 <div id="youtube-video-column"></div>
+                </div>
             </div>
 
-            <div class="col-3">
-                <div class="card-header project-color-style1">Twitter/ Reddit Search Results</div>
+            <div class="col-4">
+                <div class="scrollbar">
+                <div class="card-header project-color-style1">Reddit Custom Search
 
-                <div class="twitter-loading"></div>
-                <!-- Dynamically Generated twitter Cards -->
-                <!-- Dynamically display generate results to HERE on CARDS -->
-                <div id="tweets-dynamic-view">
-                    <!--  If twitter doesent get response, custom search twitter with google -->
+                </div>
+                <div id="reddit-diplay-column"></div>
 
                 </div>
             </div>
         </div>
+
+        <!-- IF TWITTER WORKS IT GOES HERE/ IF NOT WE DELETE LATER -->
+        <div class="row">
+
+            <div class="col-4">
+            </div>
+
+            <div class="col-4">
+
+                <div class="card-header project-color-style1">Twitter Search Results
+                </div>
+                <!-- Dynamically Generated twitter Cards -->
+                <!-- Dynamically display generate results to HERE on CARDS -->
+                <div id="tweets-dynamic-view">
+                    <!--  If twitter doesent get response, REMOVECLASS CSS .loader -->
+                </div>
+                <div class="twitter-loading">
+                </div>
+
+            </div>
+
+            <div class="col-4">
+            </div>
         </div>
+
 
     </main>
 
