@@ -7,9 +7,6 @@
 // -- Knock (news Knock)
 // -- Newesum
 
-// function window.onload() {
-
-// }
 
 $(document).ready(function () {
 
@@ -22,24 +19,8 @@ $(document).ready(function () {
   var localStorageTerm = localStorage.getItem("searchTerm")
   // By default display the search from localStorage
   $(".last-search-term").val(localStorageTerm);
-  console.log("default localStorage.getItem(searchTerm)) === ", localStorageTerm)
+  // console.log("default localStorage.getItem(searchTerm)) === ", localStorageTerm)
   // END vars
-
-  // new function to call Google search
-  function searchGoogleCSE(tweet) {
-    console.log("searchGoogleCSE() > tweet =", tweet)
-    // $("#googleCSE").val(tweet)
-    display =
-      `
-        <script async src="https://cse.google.com/cse.js?cx=016389558833326296142:ezmrodyt_by"></script>
-        <div class="gcse-search" id="googleCSE" data-autoSearchOnLoad="true" data-autoCompleteMaxCompletions="5"
-        >"${tweet}"</div>
-      `;
-    $("#reddit-diplay-column").append(display)
-
-
-  }
-
 
 
   $(".main-search-button").on("click", function (event) {
@@ -51,14 +32,12 @@ $(document).ready(function () {
     var tweet = $("#user-search-input").val().trim()
     tweets.push(tweet)
 
-    searchGoogleCSE(tweet)
     renderSearchButtons()
 
     // Clear localStorage
     localStorage.clear();
     // Store searched content into localStorage
     localStorage.setItem("searchTerm", tweet);
-
 
 
     // serch user input as = tweet variable passed into > codebird.js AJAX function __call
