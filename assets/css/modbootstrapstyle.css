@@ -137,6 +137,13 @@ p {
     right: 0;
 }
 
+/* Youtube section */
+
+.ytdesc {
+    width: 525px; 
+}
+
+
 @-webkit-keyframes load3 {
     0% {
         -webkit-transform: rotate(0deg);
