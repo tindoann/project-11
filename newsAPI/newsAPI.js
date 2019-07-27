@@ -15,7 +15,7 @@ $('.main-search-button').on('click', function (event) {
       display =
 
         `
-  <div class="card m-2 float-left" style="width: 18rem;">
+  <div class="card m-2 float-left"">
   
   <div class="card-title"<h4>${results[i].title}</h4>
   <div class="card-body">
