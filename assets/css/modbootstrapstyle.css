@@ -45,17 +45,25 @@ body {
 } */
 
 
-
 .scrollbar {
-    height: 600px;
-    overflow-y: auto;
+    overflow: scroll;
+    overflow-x: hidden;
 }
+
+::-webkit-scrollbar {
+    width: 0px; 
+    background: transparent;
+    }
 
 .scrollbar2 {
     height: 600px;
     overflow-y: auto;
 }
-
+::-webkit-scrollbar {
+    width: 0px; 
+    background: transparent;
+    }
+    
 .button {
     margin: 15px;
 }
