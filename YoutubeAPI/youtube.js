@@ -31,7 +31,7 @@ $('.main-search-button').on('click', function (prevent) {
     $("#youtube-video-column").html("");
     $.each(results.items, function (index, item) {
       $.get("item.html", function (data) {
-        $("#youtube-video-column").append(tplawesome(data, [{ "videoid": item.id.videoId, "description": item.snippet.description}]));
+        $("#youtube-video-column").append(tplawesome(data, [{ "videoid": item.id.videoId, "description": item.snippet.description, "publishedAt": item.snippet.publishedAt}]));
         //$("#results").append(item.id.videoId+' '+item.snippet.title+'<br'); 
       });
     });
