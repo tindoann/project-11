@@ -1,141 +1,33 @@
 // ==+==============================================================================+==
 // names
-// -- Bounce
-// -- Post
-// -- Combust
-// -- NetBust
-// -- Knock (news Knock)
-// -- Newesum
-
-// function window.onload() {
-
-// }
+// -- (News) N-Directory (News)
 
 $(document).ready(function () {
 
-  // Set new reference to codebird = cb
-  // Set authentication app-only bearer token
-  var cb = new Codebird;
-  cb.setBearerToken("AAAAAAAAAAAAAAAAAAAAAMc6%2FQAAAAAAwOp0nm4pRcBP6Ll%2F1nFZ0qH1dzY%3DFpBUJ6yfl8mJhnZPnQy6IiIIyBk7TIkMNwjbwz01dkFzLi0hDI");
   var tweets = ["tweet", "classic"]
-
+  
   var localStorageTerm = localStorage.getItem("searchTerm")
   // By default display the search from localStorage
   $(".last-search-term").val(localStorageTerm);
-  console.log("default localStorage.getItem(searchTerm)) === ", localStorageTerm)
-  // END vars
+  // console.log("localStorage.getItem(searchTerm)) === ", localStorageTerm)
 
-  // new function to call Google search
-  function searchGoogleCSE(tweet) {
-    console.log("searchGoogleCSE() > tweet =", tweet)
-    // $("#googleCSE").val(tweet)
-    display =
-      `
-        <script async src="https://cse.google.com/cse.js?cx=016389558833326296142:ezmrodyt_by"></script>
-        <div class="gcse-search" id="googleCSE" data-autoSearchOnLoad="true" data-autoCompleteMaxCompletions="5"
-        >"${tweet}"</div>
-      `;
-    $("#reddit-diplay-column").append(display)
-
-
-  }
-
-
-
+  
   $(".main-search-button").on("click", function (event) {
     event.preventDefault()
 
-    $(".twitter-loading").addClass("loader")
-    $("#reddit-diplay-column").empty()
-
     var tweet = $("#user-search-input").val().trim()
     tweets.push(tweet)
+    console.log("Twitter tweet = ", tweet)
 
-    searchGoogleCSE(tweet)
     renderSearchButtons()
-
+    
     // Clear localStorage
     localStorage.clear();
     // Store searched content into localStorage
     localStorage.setItem("searchTerm", tweet);
-
-
-
-    // serch user input as = tweet variable passed into > codebird.js AJAX function __call
-    cb.__call(
-      "search_tweets",
-      `q=${tweet}`,
-      null,
-      true,
-      function (reply, rate, err) {
-        if (err) {
-          console.log("error response or timeout exceeded" + err.error);
-        }
-        if (reply) {
-          // store the authenticated token, which may be different from the request token (!)
-          cb.setToken(reply.oauth_token, reply.oauth_token_secret);
-        }
-        // if you need to persist the login after page reload,
-        // consider storing the token in a cookie or HTML5 local storage
-      }).then(
-        // THEN - handle the response in renderSearchResults(response)
-        function (response) {
-          console.log('cb ajax > response = ', response);
-
-          renderSearchResults(response)
-        }
-      );
-
   });
 
-
-  // Handle AJAX response after #main-search-button is clicked
-  // IF twitter does not respond, css animation, on bad Response - custom Reddit Google Search
-  // ELSE tidder good response, search twitter
-  function renderSearchResults(response) {
-
-    $("#tweets-dynamic-view").empty()
-    // console.log('renderSearchResults here >> response = ', response);
-    // console.log("response.reply.httpstatus = ", response.reply.httpstatus)
-
-    // error handle response data
-    // card columns may be the way to go
-    if (response.reply.httpstatus === 0) {
-
-      display =
-        `
-          <div class"card-body text-danger">
-          <div class="card-header text-danger">-_- Codebird.js Proxy Error -_-</div>
-          `
-
-      $(".twitter-loading").removeClass("loader")
-      $('#tweets-dynamic-view').append(display);
-
-      console.log("twitter ran incorrectly -> response.reply.httpstatus = ", response.reply.httpstatus)
-
-      // else response data > dynamically generate tweets text on card body
-    } else {
-
-      for (let i = 0; i < response.reply.statuses.length; i++) {
-
-        var text = response.reply.statuses[i].text
-
-        display =
-          `
-            <div class="card">
-            <div class="card-body">${text}</p>
-            </div>
-            `;
-
-        $('#tweets-dynamic-view').append(display);
-        // add the new tweet cards to the page
-
-        console.log("twitter ran correctly -> response.reply.statuses.length = ", response.reply.statuses.length)
-      }
-    }
-
-  }
-
+  
   function renderSearchButtons() {
     $("#buttons-display-view").empty()
     for (var i = 0; i < tweets.length; i++) {
@@ -146,20 +38,20 @@ $(document).ready(function () {
       $("#buttons-display-view").append(a)
     }
   }
+  
 
   $('#buttons-display-view').on('click', '.tweet', function () {
     event.preventDefault();
-
-    $("#tweets-view").empty()
+    // $("#tweets-view").empty()
     const tweetName = $(this).attr("data-name")
     console.log("buttons attribute data-name = " + tweetName)
-
+    
   });
-
-
+  
+  
   renderSearchButtons()
-
-
+  
+  
 });
 
 
@@ -167,67 +59,83 @@ $(document).ready(function () {
 // ==+==========================================================================+==
 
 
+// serch user input as = tweet variable passed into > codebird.js AJAX function __call
+// cb.__call(
+//   "search_tweets",
+//   `q=${tweet}`,
+//   null,
+//   true,
+//   function (reply, rate, err) {
+//     if (err) {
+//       console.log("error response or timeout exceeded" + err.error);
+//     }
+//     if (reply) {
+//       cb.setToken(reply.oauth_token, reply.oauth_token_secret);
+//     }
+//   }).then(
+//     function (response) {
+//       console.log('cb ajax > response = ', response);
 
+//       renderSearchResults(response)
+//     }
+//     );
+// store the authenticated token, which may be different from the request token (!)
+// if you need to persist the login after page reload,
+// consider storing the token in a cookie or HTML5 local storage
+// THEN - handle the response in renderSearchResults(response)
 
+// Handle AJAX response after #main-search-button is clicked
+// IF twitter response.reply.httpstatus === 0 >> not visible
+// ELSE twitter good response, search twitter
+// function renderSearchResults(response) {
 
+//   console.log('renderSearchResults(response) > here response = ', response);
+//   console.log("response.reply.httpstatus = ", response.reply.httpstatus)
 
-// ==+===== other code notes ===================================================+==
+//   $("#tweets-dynamic-view").empty()
 
-// ==+===============================+==
-// BUILD TWITTER SEARCH WITH PARAMETERS ENTERED INTO CODEBIRD.js .__call() method
-// cd.__call("search_tweets", "q=test", function (resp) { console.log(resp)}, true);
-// -
-// Codebird AJAX function  == __call - it builds string for URL with parameters.
-// -
-// ==+===============================+==
-// true - this parameter required
-// Thomas - trying to make sure setBearer still holds token - does not stay set and is frustraiting
-// console.log(cb.setBearerToken) 
-// changed search_tweets to search/tweets in parameters
-// cb.setBearerToken("AAAAAAAAAAAAAAAAAAAAAMc6%2FQAAAAAAwOp0nm4pRcBP6Ll%2F1nFZ0qH1dzY%3DFpBUJ6yfl8mJhnZPnQy6IiIIyBk7TIkMNwjbwz01dkFzLi0hDI");
-// bearer token should already be set - i was resetting in main-search-button but have removed
+  // error handle response data
+  // card columns may be the way to go
+  // if (response.reply.httpstatus === 0) {
 
-// <img src='${results[i].urlToImage}'>
-// <p>${results[i].description}</p>
-// <p>${results[i].content}</p>
-// <p>Published on: ${results[i].publishedAt}</p>
-// <a href='${results[i].url}' class='btn'>Read more</a>
+    // display =
+    //   `
+    //     <div class"card-body text-danger">
+    //     <div class="card-header text-danger">-_- Codebird.js Proxy Error -_-</div>
+    //     `
 
-// var tweetDiv = $("#tweets-dynamic-view")
-// var tweetCard = $("<div class='card tweetCard'>")
-// tweetCard.addClass("card-body")
-// var tweetText = $("<p class='card-text'>").text("tweetText: =" + text)
-// tweetDiv.append(tweetCard)
+    // $(".twitter-loading").removeClass("loader")
+    // $('#tweets-dynamic-view').append(display);
+
+    // console.log("twitter ran incorrectly -> response.reply.httpstatus = ", response.reply.httpstatus)
+
+    // else response data > dynamically generate tweets text on card body
+  // } else {
+
+  //   console.log("twitter ran correctly -> response.reply.statuses.length = ", response.reply.statuses.length)
+
+  //   displayHeader =
+  //     `
+  //       <div class="card-header project-color-style1">Twitter Search Results</div>
+  //       `;
+
+    // add the header to the page
+    // $('#tweets-dynamic-view').append(displayHeader);
+
+    // for (let i = 0; i < response.reply.statuses.length; i++) {
+
+    //   var text = response.reply.statuses[i].text
+
+    //   display =
+    //     `
+    //       <div class="card">
+    //       <div class="card-body">${text}</div>
+    //       </div>
+    //       `;
+
+      // add the cards  to the page
+//       $('#tweets-dynamic-view').append(display);
+
+//     }
+//   }
 // }
-
-// Create the new row
-// var newRow = $("<tr>").append(
-// Name
-//   $("<td>").text(trainName)
-// );
-// Append the new row to the table
-// $("#train-table > tbody").append(newRow);
-// var image = $("<img>").attr("src", imgURLStill).addClass('tweety')
-// ==+==========================================================================+==
-// ==+==========================================================================+==
-// FSU6bR8JdQURQhuv6TUi7QctX (API key)
-// Resource URL - https://api.twitter.com/1.1/search/tweets.json
-// bearer token - AAAAAAAAAAAAAAAAAAAAAMc6%2FQAAAAAAwOp0nm4pRcBP6Ll%2F1nFZ0qH1dzY%3DFpBUJ6yfl8mJhnZPnQy6IiIIyBk7TIkMNwjbwz01dkFzLi0hDI
-//              - AAAAAAAAAAAAAAAAAAAAAMc6%2FQAAAAAAwOp0nm4pRcBP6Ll%2F1nFZ0qH1dzY%3DFpBUJ6yfl8mJhnZPnQy6IiIIyBk7TIkMNwjbwz01dkFzLi0hDI
-// O.Authenticate with Bearer token, then create URL
-// --- USED Codebird Library to complete this call instead of AJAX ---
-// $.ajax({
-//     headers: { Authorization: 'Bearer '+ 'AAAAAAAAAAAAAAAAAAAAAMc6%2FQAAAAAAwOp0nm4pRcBP6Ll%2F1nFZ0qH1dzY%3DFpBUJ6yfl8mJhnZPnQy6IiIIyBk7TIkMNwjbwz01dkFzLi0hDI' },
-//     url: 'https://api.twitter.com/1.1/search/tweets.json?q='+ $search
-//   }).then(function (data) {
-//     // Play with the data
-//     console.log(data)      });
-// --- USED Codebird Library to complete this call instead of AJAX ---
-// ==+==================================================================================================================+==
-// ==+==================================================================================================================+==
-// ==+
-// ==+
-// ==+==========================================================================+==
-// END
-// ==+==========================================================================+==
-
