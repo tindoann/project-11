@@ -12,8 +12,8 @@ function onYouTubeApiLoad() {
 // Called when the search button is clicked in the html code
 $('.main-search-button').on('click', function (prevent) {
   event.preventDefault()
-  $('#user-search-input').empty();
-  var query = $('#user-search-input').val().trim();
+  $('.user-search-input').empty();
+  var query = $('.user-search-input').val().trim();
 
   // Use the JavaScript client library to create a search.list() API call.
   var request = gapi.client.youtube.search.list({

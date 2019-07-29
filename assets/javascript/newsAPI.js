@@ -2,7 +2,7 @@ $('.main-search-button').on('click', function (event) {
   event.preventDefault()
   
   $("#news-display-view").empty(event)
-  var query = $('#user-search-input').val().trim();
+  var query = $('.user-search-input').val().trim();
   console.log("NewsAPI query = ", query);
 
   var queryURL = "https://newsapi.org/v2/everything?q=" + query + "&from=2019-07-19&to=2019-07-19&sortBy=popularity&apiKey=37ef007297c34129a5a467ca9a5304ab";
