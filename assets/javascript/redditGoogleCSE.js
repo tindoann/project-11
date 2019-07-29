@@ -21,8 +21,8 @@ $('.main-search-button').on('click', function (prevent) {
             var item = response.items[i]
             display =
                 `
-                <div class="card m-2">
-                <div class="card-body">
+                <div class="card m-2" rounded-sm>
+                <div class="card-body" rounded-sm>
                 
                 <div class="card-title">${item.title}
                 </div>

@@ -1,12 +1,11 @@
 /* MOD BootStrap Style */
 
 ::selection {
-    background-color: rgb(90, 200, 233);
+background: rgb(172,168,165);
 }
 
 .project-color-style1 {
-    background-color: rgb(54, 94, 128);
-    color: rgb(27, 240, 255);
+    background: rgba(255, 255, 255, 0.6);;
 }
 
 /* .card-img-overlay {
@@ -15,7 +14,8 @@ background-size: cover;
 } */
 
 body {
-    background-color: rgb(46, 56, 63);
+    background: rgb(172,168,165);
+    background: linear-gradient(90deg, rgba(172,168,165,1) 0%, rgba(215,199,188,0.9402135854341737) 56%, rgba(219,210,204,0.5060399159663865) 87%);
     /* background-size: cover; */
 }
 
@@ -97,9 +97,14 @@ p {
     font-family: 'Arial', 'Helvetica Neue', Helvetica, sans-serif;
 }
 
+.card-header {
+    font-family: 'Oswald', sans-serif;
+    font-size: 24px; 
+    color: rgba(73, 67, 67, 0.8);
+}
 /* CSS ANIMATIONS */
 
-.loader {
+/* .loader {
     font-size: 10px;
     margin: 50px auto;
     text-indent: -9999em;
@@ -143,12 +148,16 @@ p {
     left: 0;
     bottom: 0;
     right: 0;
-}
+} */
 
 /* Youtube section */
 
 .ytdesc {
     width: 525px; 
+}
+
+.read {
+    color: #fff; 
 }
 
 
@@ -202,7 +211,7 @@ p {
     width: 500px;
     height: 300px;
     left: -webkit-calc( 50% - 250px );
-    top: 20%;
+    top:150px;
     position: absolute;
     z-index: 100;
     border-radius: 5px;
