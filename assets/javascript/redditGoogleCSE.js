@@ -2,7 +2,7 @@ $('.main-search-button').on('click', function (prevent) {
     event.preventDefault()
 
     $("#reddit-display-column").empty()
-    var query = $('#user-search-input').val().trim();
+    var query = $('.user-search-input').val().trim();
 
     console.log("Reddit query = ", query);
 

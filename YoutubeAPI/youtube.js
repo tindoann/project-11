@@ -5,15 +5,15 @@ function onClientLoad() {
 }
 // Called automatically when YouTube API interface is loaded/
 function onYouTubeApiLoad() {
-  gapi.client.setApiKey('AIzaSyB_LacdNoyYmvySVPxZIORjEZ4hjXu13S4') 
-  // gapi.client.setApiKey('AIzaSyBEDZ-mNT4ZebCqzIan1K8VrZ2FwHgJ-e8');
+  gapi.client.setApiKey('AIzaSyBEDZ-mNT4ZebCqzIan1K8VrZ2FwHgJ-e8') 
+  // gapi.client.setApiKey('AIzaSyBEDZ-mNT4ZebCqzIan1K8VrZ2FwHgJ-e8'); AIzaSyB_LacdNoyYmvySVPxZIORjEZ4hjXu13S4 
 }
 
 // Called when the search button is clicked in the html code
 $('.main-search-button').on('click', function (prevent) {
   event.preventDefault()
-  $('#user-search-input').empty();
-  var query = $('#user-search-input').val().trim();
+  $('.user-search-input').empty();
+  var query = $('.user-search-input').val().trim();
 
   // Use the JavaScript client library to create a search.list() API call.
   var request = gapi.client.youtube.search.list({
@@ -39,7 +39,7 @@ $('.main-search-button').on('click', function (prevent) {
 })
 
 function loadVideo() {
-  var apiKey = "AIzaSyB_LacdNoyYmvySVPxZIORjEZ4hjXu13S4"; //AIzaSyBEDZ-mNT4ZebCqzIan1K8VrZ2FwHgJ-e8
+  var apiKey = "AIzaSyBEDZ-mNT4ZebCqzIan1K8VrZ2FwHgJ-e8"; //AIzaSyBEDZ-mNT4ZebCqzIan1K8VrZ2FwHgJ-e8
   var queryURL = 'https://www.googleapis.com/youtube/v3/search?part=snippet&q=&maxResults=5&order=viewCount&publishedAfter=2016-01-01T00%3A00%3A00Z&q=teaser%7Ctrailer&type=video&videoCaption=any&videoCategoryId=24&videoEmbeddable=true&key=' + apiKey;
   $.ajax({
     url: queryURL,
